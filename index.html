@@ -1,1 +1,233 @@
-FYP
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Athena-KB — Self-Hosted RAG for Offensive Security</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="brand-bar">
+      <img src="assets/Athena-KB.svg" alt="">
+      <span>Athena-KB</span>
+    </div>
+    <div class="hero">
+      <div class="hero-text">
+        <div class="eyebrow">Final Year Project &middot; April 2026</div>
+        <h1>Athena-KB</h1>
+        <p class="project-title">Development of a Secure, Multi-Source Retrieval Augmented Generation (RAG) System for Offensive Security Knowledge Management</p>
+        <p class="subtitle">A proof-of-concept, fully self-hosted RAG system that enables red team operators to curate, manage, and query cybersecurity knowledge bases from both internal and external sources, returning transparent, source-backed answers.</p>
+        <div class="author">
+          <img class="headshot" src="assets/headshot.jpg" alt="Ava Neary"
+               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'headshot',style:'display:flex;align-items:center;justify-content:center;color:#888;font-size:.7rem',innerText:'photo'}))" />
+          <div class="author-meta">
+            <div class="name">Ava Neary</div>
+            <div class="role">BSc (Hons) Applied Computing, Digital Forensics &amp; Security</div>
+          </div>
+        </div>
+      </div>
+      <img class="hero-logo" src="assets/Athena-KB.svg" alt="Athena-KB logo">
+    </div>
+  </div>
+</header>
+
+<nav class="subnav">
+  <div class="container subnav-inner">
+    <a href="#features">Features</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#interface">Interface</a>
+    <a href="#pipeline">Pipeline</a>
+    <a href="#poster">Poster</a>
+  </div>
+</nav>
+
+<section id="features">
+  <div class="container">
+    <div class="section-eyebrow">01 &mdash; What it does</div>
+    <h2>Key Features</h2>
+    <p class="lead">Designed to address the operational security and knowledge accessibility challenges identified in offensive security workflows.</p>
+    <div class="features">
+      <div class="feature">
+        <div class="num">01</div>
+        <h3>Scoped Knowledge Bases</h3>
+        <p>RAGFlow knowledge bases act as separate datasets, each with their own documents, parsing config, and retrieval pipeline.</p>
+      </div>
+      <div class="feature">
+        <div class="num">02</div>
+        <h3>External Ingestion</h3>
+        <p>RSS and Discord are supported as external sources, with most file types accepted through direct upload.</p>
+      </div>
+      <div class="feature">
+        <div class="num">03</div>
+        <h3>Ingestion Pipelines</h3>
+        <p>The external ingestor scrapes and normalises content and injects metadata. RAGFlow then enriches each chunk with keywords, summaries, and generated questions.</p>
+      </div>
+      <div class="feature">
+        <div class="num">04</div>
+        <h3>AWS Infrastructure as Code</h3>
+        <p>AWS resources are defined and deployed using IaC.</p>
+      </div>
+      <div class="feature">
+        <div class="num">05</div>
+        <h3>Web UIs</h3>
+        <p>The external ingestor has its own UI for configuring sources. RAGFlow provides a separate interface for knowledge base management, pipeline configuration, and querying.</p>
+      </div>
+      <div class="feature">
+        <div class="num">06</div>
+        <h3>Modular and Scalable</h3>
+        <p>RAGFlow lets you build multiple pipelines with different chunking and retrieval configs. Xinference supports distributed inference, and the ingestor backend runs on FastAPI.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="architecture">
+  <div class="container">
+    <div class="section-eyebrow">02 &mdash; How it works</div>
+    <h2>System Architecture</h2>
+    <p class="lead">The external ingestor feeds content into RAGFlow, which handles the pipelines and knowledge bases and calls out to the AI inference backend for embeddings, generation, and reranking.</p>
+    <div class="arch-frame">
+      <img src="assets/Aws_diagram.png" alt="Architecture diagram"
+           onerror="this.parentNode.innerHTML='<div style=&quot;color:#888;font-size:.85rem;padding:2rem&quot;>Architecture diagram placeholder</div>'">
+    </div>
+  </div>
+</section>
+
+<section id="interface">
+  <div class="container">
+    <div class="section-eyebrow">03 &mdash; Web UI</div>
+    <h2>Interfaces</h2>
+    <p class="lead">The external ingestor has its own UI for managing and running sources. RAGFlow handles knowledge base management, pipeline config, and querying.</p>
+    <div class="carousel" id="ui-carousel">
+      <div class="carousel-track">
+        <div class="carousel-slide">
+          <a href="assets/ui-sources.png" target="_blank" rel="noopener">
+            <div class="slide-img"><img src="assets/ui-sources.png" alt="Dashboard" loading="lazy"></div>
+            <div class="slide-meta">
+              <div class="slide-title">Dashboard</div>
+              <div class="slide-desc">Add, run, and manage RSS, URL, and Discord sources from a single view.</div>
+            </div>
+          </a>
+        </div>
+        <div class="carousel-slide">
+          <a href="assets/ui-logs.png" target="_blank" rel="noopener">
+            <div class="slide-img"><img src="assets/ui-logs.png" alt="Logs" loading="lazy"></div>
+            <div class="slide-meta">
+              <div class="slide-title">Logs</div>
+              <div class="slide-desc">Shows ingestion progress, errors, and what the workers are doing in real time.</div>
+            </div>
+          </a>
+        </div>
+        <div class="carousel-slide">
+          <a href="assets/ui-metadata.png" target="_blank" rel="noopener">
+            <div class="slide-img"><img src="assets/ui-metadata.png" alt="Log View" loading="lazy"></div>
+            <div class="slide-meta">
+              <div class="slide-title">Log View</div>
+              <div class="slide-desc">Clicking a log entry opens a dialog showing the scraped content and its metadata.</div>
+            </div>
+          </a>
+        </div>
+        <div class="carousel-slide">
+          <a href="assets/ui-query-output.png" target="_blank" rel="noopener">
+            <div class="slide-img"><img src="assets/ui-query-output.png" alt="Query output" loading="lazy"></div>
+            <div class="slide-meta">
+              <div class="slide-title">Query Output</div>
+              <div class="slide-desc">Source-cited responses returned against the selected knowledge base.</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <div class="carousel-dots"></div>
+        <div class="carousel-arrows">
+          <button class="carousel-arrow" data-dir="-1" aria-label="Previous">&larr;</button>
+          <button class="carousel-arrow" data-dir="1" aria-label="Next">&rarr;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pipeline">
+  <div class="container">
+    <div class="section-eyebrow">04 &mdash; Data flow</div>
+    <h2>Data Enrichment Pipeline</h2>
+    <p class="lead">Ingested content flows through a configurable pipeline that applies metadata enrichment to improve downstream retrieval.</p>
+    <div class="pipeline-frame">
+      <img src="assets/dataset-ingest-pipeline.png" alt="Data enrichment pipeline diagram">
+    </div>
+  </div>
+</section>
+
+<section id="poster">
+  <div class="container">
+    <div class="section-eyebrow">05 &mdash; The full picture</div>
+    <h2>Project Poster</h2>
+    <div class="poster">
+      <iframe src="assets/poster.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" title="Project poster" loading="lazy"></iframe>
+    </div>
+    <p class="poster-caption"><a href="assets/poster.pdf" target="_blank" rel="noopener">Open full poster in new tab &rarr;</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="sponsors">
+      <div class="logo-frame">
+        <img src="assets/logo.png" alt="logo" onerror="this.parentNode.innerText='sponsor logo'">
+      </div>
+      <div class="logo-frame">
+        <img src="assets/setu.png" alt="South East Technological University" onerror="this.parentNode.innerText='SETU logo'">
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.carousel').forEach(function(carousel) {
+    var track = carousel.querySelector('.carousel-track');
+    var slides = carousel.querySelectorAll('.carousel-slide');
+    var dotsContainer = carousel.querySelector('.carousel-dots');
+    var arrows = carousel.querySelectorAll('.carousel-arrow');
+
+    slides.forEach(function(slide, i) {
+      var dot = document.createElement('button');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+      dot.addEventListener('click', function() { scrollToSlide(i); });
+      dotsContainer.appendChild(dot);
+    });
+
+    var dots = dotsContainer.querySelectorAll('.carousel-dot');
+
+    function getCurrentIndex() {
+      return Math.round(track.scrollLeft / track.clientWidth);
+    }
+
+    function scrollToSlide(i) {
+      if (i < 0) i = 0;
+      if (i >= slides.length) i = slides.length - 1;
+      track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+    }
+
+    arrows.forEach(function(arrow) {
+      arrow.addEventListener('click', function() {
+        scrollToSlide(getCurrentIndex() + parseInt(arrow.dataset.dir));
+      });
+    });
+
+    track.addEventListener('scroll', function() {
+      var current = getCurrentIndex();
+      dots.forEach(function(dot, i) {
+        dot.classList.toggle('active', i === current);
+      });
+    });
+  });
+</script>
+</body>
+</html>
